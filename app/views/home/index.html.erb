@@ -1,0 +1,24 @@
+<%= simple_form_for(resource, 
+                    :as => resource_name, 
+                    :wrapper => :inline, 
+                    :url => session_path(resource_name)) do |f| %>
+
+	<%= f.input :login, :required => true, :autofocus => true %>
+	<%= f.input :password, :required => true %>
+    <%= f.button :submit, "Sign in" %>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+<script type="text/javascript" charset="utf-8">
+  $('#xpto #xpto').blur( function(){
+    var jqxhr = $.ajax( { 
+	                       url: "/lists",
+	                       type: "post",
+	                       dataType: "json"
+	                     } )
+                  .done(   function(data) { alert(data); } )
+                  .fail(   function()     { alert("error"); } )
+                  .always( function()     { alert("complete"); } );
+     });
+</script>
