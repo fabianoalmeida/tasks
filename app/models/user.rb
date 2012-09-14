@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
             :format => /^[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*$/,
             :allow_blank => true
   
+  has_many :lists
+  
   protected
 
   def self.find_first_by_auth_conditions(warden_conditions)

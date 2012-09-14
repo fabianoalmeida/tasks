@@ -1,5 +1,7 @@
 Tasks::Application.routes.draw do
   
+  resources :lists
+
   devise_scope :user do
     get '/login' => 'devise/sessions#new'
     get '/logout' => 'devise/sessions#destroy'
