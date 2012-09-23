@@ -7,11 +7,17 @@ gem 'devise'
 gem 'cancan'
 gem 'simple_form'
 gem 'responders'
+gem 'squeel'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem 'ruby-debug19'
+  gem 'sextant'
 end
 
 group :test do
