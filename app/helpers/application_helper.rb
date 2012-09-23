@@ -20,6 +20,9 @@ module ApplicationHelper
     
     options = params[:controller] == "public_list" ? { class: "active" } : {}
     links << content_tag(:li, link_to("Public Lists", public_lists_path), options).html_safe
+    
+    options = params[:controller] == "favorite_list" ? { class: "active" } : {}
+    links << content_tag(:li, link_to("Favorite Lists", favorite_lists_path), options).html_safe
 
     content_tag(:ul, links.join("\n").html_safe, class: "nav")
   end  
