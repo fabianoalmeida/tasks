@@ -17,7 +17,6 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
-    @task = @list.tasks.build
     respond_with(@list)
   end
 
