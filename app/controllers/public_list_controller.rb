@@ -4,7 +4,7 @@ class PublicListController < ApplicationController
   before_filter :authenticate_user!
   
   def index
-    @lists = List.where{ ( user_id.not_eq my{ current_user.id } ) & ( limited.eq false ) }
+    @lists = List.publics_for( current_user )
     respond_with(@lists)
   end
   

@@ -11,4 +11,8 @@ class List < ActiveRecord::Base
   
   accepts_nested_attributes_for :tasks, :reject_if => lambda { |t| t[:name].blank? }, allow_destroy: true
   
+  def self.publics_for(user)
+    where{ ( user_id.not_eq my{ user.id } ) & ( limited.eq false ) }
+  end
+  
 end

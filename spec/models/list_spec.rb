@@ -82,4 +82,25 @@ describe List do
       tasks.should have(:no).items
     end
   end
+  
+  describe "unlimited" do
+    it "should have no items" do
+      list = FactoryGirl.create( :list, limited: true )
+      lists = List.publics_for(list.user)
+      lists.should have(:no).items
+    end
+
+    it "should have no items for the same user" do
+      list = FactoryGirl.create( :list )
+      lists = List.publics_for(list.user)
+      lists.should have(:no).items
+    end
+    
+    it "should have one item for a different user" do
+      user = FactoryGirl.create( :user )
+      list = FactoryGirl.create( :list )
+      lists = List.publics_for(user)
+      lists.should have(1).items
+    end
+  end
 end

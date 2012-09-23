@@ -104,6 +104,22 @@ describe User do
       @user.should have(0).errors_on(:username)
     end    
   end
+
+  describe "with favorite lists" do
+    it "should not be added limited lists" do
+      list = FactoryGirl.build( :list, limited: true )
+      lambda { @user.favorite_lists << list }.should raise_error(RuntimeError, "Only must add a list unlimited")
+      @user.favorite_lists.should have(:no).items
+      @user.should have(:no).errors_on(:favorite_lists)
+    end
+
+    it "should not be added unlimited lists from the same user" do
+      list = FactoryGirl.build( :list, user: @user )
+      lambda { @user.favorite_lists << list }.should raise_error(RuntimeError, "Only must add a list from other user")
+      @user.favorite_lists.should have(:no).items
+      @user.should have(:no).errors_on(:favorite_lists)
+    end
+  end
   
   describe "abilities" do
     
