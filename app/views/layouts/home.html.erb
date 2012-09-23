@@ -3,21 +3,57 @@
   <head>
 	<meta charset="utf-8" />
 	<title>Tasks</title>
-	<%= stylesheet_link_tag "flexi-background", "styles" %>
+	<%= stylesheet_link_tag "bootstrap.min" %>
 	<%= csrf_meta_tags %>
+	<style type="text/css">
+	  /* Override some defaults */
+	  html, body {
+	    background-color: #eee;
+	  }
+	  
+	  body {
+	    padding-top: 40px; 
+	  }
+	  
+	  .container {
+	    width: 300px;
+	  }
+
+	  /* The white background content wrapper */
+	  .container > .content {
+	    background-color: #fff;
+	    padding: 20px;
+	    margin: 0 -20px; 
+	    -webkit-border-radius: 10px 10px 10px 10px;
+	       -moz-border-radius: 10px 10px 10px 10px;
+	            border-radius: 10px 10px 10px 10px;
+	       -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	          -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	               box-shadow: 0 1px 2px rgba(0,0,0,.15);
+	  }
+
+	  .login-form {
+	    margin-left: 65px;
+	  }
+
+	  legend {
+	    margin-right: -50px;
+	    font-weight: bold;
+	    color: #404040;
+	  }
+
+	</style>
   </head>
   <body>
-    <div id="box">
-	  <%= link_to image_tag('/assets/logo.png', :class => "logo"), root_path %>
-	  <%= yield :main_title %>
-      <%= yield %>
-    </div>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-    <% unless content_for?(:forgot_password) %>
-	  <%= link_to t("application.forgor_your_password"), new_password_path(resource_name), :class => 'forgot' %>
-	<% end %>
-    <%= javascript_include_tag "flexi-background" %>
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="login-form">
+					<h2>Login</h2>
+					<%= yield %>
+	        	</div>
+	    	</div>
+		</div>
+	</div>
   </body>
 </html>

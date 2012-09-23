@@ -1,11 +1,11 @@
 <%= simple_form_for(resource, 
                     :as => resource_name, 
-                    :wrapper => :inline, 
-                    :url => session_path(resource_name)) do |f| %>
+                    :wrapper => :login, 
+                    :url => session_path(resource_name) ) do |f| %>
 
-	<%= f.input :login, :required => true, :autofocus => true %>
-	<%= f.input :password, :required => true %>
-    <%= f.button :submit, "Sign in" %>
+	<%= f.input :login, :required => true, :autofocus => true, :label => false, :placeholder => 'Login' %>
+	<%= f.input :password, :required => true, :label => false, :placeholder => 'Password' %>
+    <%= f.button :submit, "Sign in", :class => "btn primary" %>
 <% end %>
 
 <%= render "devise/shared/links" %>
