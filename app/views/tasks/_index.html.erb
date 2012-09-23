@@ -1,0 +1,12 @@
+<table id="tasks">
+  <tr>
+    <th>Task Name</th>
+    <th><%= link_to image_tag('/assets/add-action.png'), list_path(@list), title: 'New task', rel: 'New task', id: 'new_task' %></th>
+  </tr>
+
+<% @list.tasks.each do |task| %>
+  <tr>
+    <td colspan="2"><%= task.name %></td>
+  </tr>
+<% end %>
+</table>

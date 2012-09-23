@@ -1,8 +1,10 @@
 Tasks::Application.routes.draw do
   
-  resources :tasks
+  match 'public_lists' => 'public_list#index'
 
-  resources :lists
+  resources :lists do
+    resources :tasks
+  end
 
   devise_scope :user do
     get '/login' => 'devise/sessions#new'

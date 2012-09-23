@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="utf-8" />
+	<title><%= t("application.title") %></title>
+	<%= stylesheet_link_tag "flexi-background", "styles" %>
+	<%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="box">
+	  <%= link_to image_tag('/assets/logo.png', :class => "logo"), root_path %>
+	  <%= yield :main_title %>
+      <%= yield %>
+    </div>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+    <% unless content_for?(:forgot_password) %>
+	  <%= link_to t("application.forgor_your_password"), new_password_path(resource_name), :class => 'forgot' %>
+	<% end %>
+    <%= javascript_include_tag "flexi-background" %>
+  </body>
+</html>

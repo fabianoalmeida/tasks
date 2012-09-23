@@ -1,6 +1,12 @@
 class ListsController < ApplicationController
+  layout 'logged'
+  
+  before_filter :authenticate_user!
+  
+  load_and_authorize_resource :list
+  
   def index
-    @lists = List.all
+    @lists = current_user.lists
     respond_with(@lists)
   end
 
@@ -11,6 +17,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    @task = @list.tasks.build
     respond_with(@list)
   end
 
@@ -20,6 +27,7 @@ class ListsController < ApplicationController
 
   def create
     @list = List.new(params[:list])
+    @list.user = current_user
     @list.save
     respond_with(@list)
   end

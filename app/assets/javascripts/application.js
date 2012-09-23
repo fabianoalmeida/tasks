@@ -19,4 +19,5 @@
 //= require jquery-ui
 //= require jquery.meio.mask.min
 //= require jquery.miniColors.min
+//= require jquery_nested_form
 //= require_tree .

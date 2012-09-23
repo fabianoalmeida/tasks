@@ -1,5 +1,11 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <b>List Name:</b>
+  <%= @list.name %>
+</p>
 
+<br />
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+<%= render :partial => 'tasks/index' %>
+
+<%= link_to 'Edit', edit_list_path(@list), :class => 'btn primary' %>
+<%= link_to 'Back', lists_path, :class => 'btn' %>
