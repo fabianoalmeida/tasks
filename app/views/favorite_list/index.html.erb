@@ -1,5 +1,5 @@
 <% content_for :subtitle do %>
-  <h1>Public lists</h1>
+  <h1>Favorite lists</h1>
 <% end %>
 
 <table id="my_lists">
@@ -13,13 +13,7 @@
   <tr>
     <td width="40%"><%= list.user.username %></td>
     <td width="50%"><%= list.name %></td>
-    <td>
-	  <% if can? :update, list %>
-	    <% unless current_user.favorite_lists.exists? list %>
-          <%= link_to 'Favorite', list, id: 'favorite', class: 'btn primary' %>
-        <% end %>
-      <% end %>
-    </td>
+    <td><% if can? :update, list %><%= link_to 'Unfavorite', list, id: 'unfavorite', class: 'btn danger' %><% end %></td>
   </tr>
 <% end %>
 </table>

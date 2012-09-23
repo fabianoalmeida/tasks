@@ -1,7 +1,7 @@
 <table id="tasks">
   <tr>
     <th>Task Name</th>
-    <th><%= link_to image_tag('/assets/add-action.png'), list_path(@list), title: 'New task', rel: 'New task', id: 'new_task' %></th>
+    <th><% if can? :create, Task.new %><%= link_to image_tag('/assets/add-action.png'), list_path(@list), title: 'New task', rel: 'New task', id: 'new_task' %><% end %></th>
   </tr>
 
 <% @list.tasks.each do |task| %>
