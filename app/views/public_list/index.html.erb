@@ -14,10 +14,8 @@
     <td width="40%"><%= list.user.username %></td>
     <td width="50%"><%= list.name %></td>
     <td>
-	  <% if can? :update, list %>
-	    <% unless current_user.favorite_lists.exists? list %>
-          <%= link_to 'Favorite', list, id: 'favorite', class: 'btn primary' %>
-        <% end %>
+      <% unless current_user.favorite_lists.exists? list %>
+        <%= link_to 'Favorite', list, id: 'favorite', class: 'btn primary' %>
       <% end %>
     </td>
   </tr>

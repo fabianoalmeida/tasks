@@ -13,7 +13,7 @@
   <tr>
     <td width="40%"><%= list.user.username %></td>
     <td width="50%"><%= list.name %></td>
-    <td><% if can? :update, list %><%= link_to 'Unfavorite', list, id: 'unfavorite', class: 'btn danger' %><% end %></td>
+    <td><%= link_to 'Unfavorite', list, id: 'unfavorite', class: 'btn danger' %></td>
   </tr>
 <% end %>
 </table>
