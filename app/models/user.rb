@@ -29,6 +29,12 @@ class User < ActiveRecord::Base
   
   has_many :lists
   
+  has_and_belongs_to_many :favorite_lists, 
+                          :class_name  => "List",
+                          :foreign_key => "user_id",
+                          :join_table  => "lists_users", 
+                          :uniq        => :true
+  
   protected
 
   def self.find_first_by_auth_conditions(warden_conditions)
