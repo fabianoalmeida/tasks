@@ -8,8 +8,8 @@ describe "As a guest on the sign in page", :type => :request do
 
   it "signs me in" do
     visit root_path
-    fill_in 'Login', :with => 'user@example.com'
-    fill_in 'Password', :with => '123456'
+    fill_in 'user_login', :with => 'user@example.com'
+    fill_in 'user_password', :with => '123456'
     click_button 'Sign in'
   end
 end
