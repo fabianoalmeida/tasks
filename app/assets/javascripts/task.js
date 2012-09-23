@@ -29,7 +29,7 @@ function attachEvent() {
 	  	  			.success( function(data) { 
 						self.parent().html(data.name) } )
 						
-	  	   			.fail( function(data) { alert("error: "+data); } );
+	  	   			.fail( function(data) { alert("error: " + data); } );
 			e.preventDefault();
 		}
 	});
