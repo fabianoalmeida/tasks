@@ -1,4 +1,5 @@
 require 'spec_helper'
+require "cancan/matchers"
 
 describe User do
 
@@ -105,23 +106,85 @@ describe User do
   end
   
   describe "abilities" do
-    subject { ability }
     
-    # context "when is an admin" do
-    #  let( :user ){ FactoryGirl.create( :admin ) }
-    #  let( :ability ){ Ability.new( user ) }
-    #  it{ should be_able_to( :manage, :all ) }
-    # end
+    before( :each ) do
+      @user.save
+      @ability = Ability.new(@user)
+    end
     
-    # context "when is an account manager" do
-    #   let( :occupation ){ FactoryGirl.create( :manager ) }
-    #   it{ occupation.permission_modulus.should have( 2 ).items }
-    #   
-    #   let( :user ){ FactoryGirl.create( :user, occupations: [occupation] ) }
-    #   let( :ability ){ Ability.new( user ) }
-    #   it{ should be_able_to( :read, User ) }
-    #   it{ should be_able_to( :write, User ) }
-    #   it{ should_not be_able_to( :delete, User ) }
-    # end
+    context "when #list is the model" do
+      it "should be able to create a new list" do
+        @ability.should be_able_to(:create, List.new)
+      end
+
+      it "should be able to read a list" do
+        @ability.should be_able_to(:read, List.new)
+      end
+
+      it "should be able to update a new list" do
+        list = FactoryGirl.create(:list, user: @user)
+        @ability.should be_able_to(:update, list)
+      end
+
+      it "should be able to destroy a list" do
+        list = FactoryGirl.create(:list, user: @user)
+        @ability.should be_able_to(:destroy, list)
+      end
+
+      it "should be able to read a list from other user" do
+        list = FactoryGirl.create(:list)
+        @ability.should be_able_to(:read, list)
+      end
+
+      it "should not be able to update a list from other user" do
+        list = FactoryGirl.create(:list)
+        @ability.should_not be_able_to(:update, list)
+      end
+
+      it "should not be able to destroy a list from other user" do
+        list = FactoryGirl.create(:list)
+        @ability.should_not be_able_to(:destroy, list)
+      end
+    end
+    
+    context "when #task is the model" do
+      it "should be able to create a new task" do
+        @ability.should be_able_to(:create, Task.new)
+      end
+
+      it "should be able to read a task" do
+        @ability.should be_able_to(:read, Task.new)
+      end
+
+      it "should be able to update a new task" do
+        list = FactoryGirl.create(:list, user: @user)
+        list.tasks << FactoryGirl.create(:task, list: list)
+        @ability.should be_able_to(:update, list.tasks.first)
+      end
+
+      it "should be able to destroy a task" do
+        list = FactoryGirl.create(:list, user: @user)
+        list.tasks << FactoryGirl.create(:task, list: list)
+        @ability.should be_able_to(:destroy, list.tasks.first)
+      end
+
+      it "should be able to read a task from other user" do
+        list = FactoryGirl.create(:list)
+        list.tasks << FactoryGirl.create(:task, list: list)
+        @ability.should be_able_to(:read, list.tasks.first)
+      end
+
+      it "should not be able to update a task from other user" do
+        list = FactoryGirl.create(:list)
+        list.tasks << FactoryGirl.create(:task, list: list)
+        @ability.should_not be_able_to(:update, list.tasks.first)
+      end
+
+      it "should not be able to destroy a task from other user" do
+        list = FactoryGirl.create(:list)
+        list.tasks << FactoryGirl.create(:task, list: list)
+        @ability.should_not be_able_to(:destroy, list.tasks.first)
+      end
+    end
   end
 end

@@ -24,11 +24,5 @@ describe Task do
       @task.should_not be_valid
       @task.should have(1).errors_on(:list)
     end
-    
-    it "like #user with nil value" do
-      @task.user = nil
-      @task.should_not be_valid
-      @task.should have(1).errors_on(:user)
-    end
   end
 end

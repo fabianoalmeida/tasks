@@ -4,6 +4,5 @@ FactoryGirl.define do
   factory :task do
     name { generate( :name ) }
     list
-    user
   end
 end
